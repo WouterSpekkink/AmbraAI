@@ -21,9 +21,6 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_community.document_transformers import LongContextReorder, EmbeddingsRedundantFilter
 from langchain.retrievers.document_compressors import DocumentCompressorPipeline
 
-if "APIKEY" in st.secrets:
-    os.environ["OPENAI_API_KEY"] = st.secrets["APIKEY"]
-
 # ----------------------------
 # Config
 # ----------------------------

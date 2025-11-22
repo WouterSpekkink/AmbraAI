@@ -3,6 +3,9 @@ import signal
 from datetime import datetime
 import streamlit as st
 
+if "APIKEY" in st.secrets:
+    os.environ["OPENAI_API_KEY"] = st.secrets["APIKEY"]
+
 from rag_chain import rag_chain, build_context, get_sources  # from your rag_chain.py
 
 # ----------------------------

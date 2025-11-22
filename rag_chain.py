@@ -21,6 +21,9 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_community.document_transformers import LongContextReorder, EmbeddingsRedundantFilter
 from langchain.retrievers.document_compressors import DocumentCompressorPipeline
 
+if "APIKEY" in st.secrets:
+    os.environ["OPENAI_API_KEY"] = st.secrets["APIKEY"]
+
 # ----------------------------
 # Config
 # ----------------------------
@@ -41,12 +44,6 @@ K_RETRIEVER = 24      # how many chunks to retrieve before truncation / compress
 # Env / clients
 # ----------------------------
 load_dotenv()
-try:
-    if "APIKEY" in st.secrets:
-        os.environ["OPENAI_API_KEY"] = st.secrets["APIKEY"]
-except Exception:
-    pass
-
 embeddings = OpenAIEmbeddings(model=EMBED_MODEL)
 
 # Load FAISS index created by indexer.py

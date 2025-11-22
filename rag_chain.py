@@ -42,9 +42,8 @@ K_RETRIEVER = 24      # how many chunks to retrieve before truncation / compress
 # ----------------------------
 load_dotenv()
 try:
-    import constants
-    if getattr(constants, "APIKEY", None):
-        os.environ["OPENAI_API_KEY"] = constants.APIKEY
+    if "APIKEY" in st.secrets:
+        os.environ["OPENAI_API_KEY"] = st.secrets["APIKEY"]
 except Exception:
     pass
 

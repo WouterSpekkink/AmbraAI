@@ -61,7 +61,6 @@ for msg in st.session_state.messages:
         if msg.get("sources"):
             with st.expander("Sources", expanded=False):
                 for i, s in enumerate(msg["sources"], 1):
-                    st.markdown(f"**{i}. {s['ref']}**")
                     st.markdown(f"`{s['filename']}`")
                     st.markdown(f"> {s['content'][:1000]}{'…' if len(s['content'])>1000 else ''}")
                     st.markdown("---")

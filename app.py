@@ -66,6 +66,18 @@ for msg in st.session_state.messages:
                     st.markdown(f"> {s['content'][:1000]}{'…' if len(s['content'])>1000 else ''}")
                     st.markdown("---")
 
+#-----------------------------
+# Chatbot memory
+#-----------------------------
+def build_chat_history():
+    history_lines = []
+    for m in st.session_state.messages:
+        if m["role"] == "user":
+            history_lines.append(f"User: {m['content']}")
+        elif m["role"] == "assistant":
+            history_lines.append(f"Assistant: {m['content']}")
+    return "\n".join(history_lines[-8:])  # keep last ~8 turns
+
 # ----------------------------
 # Chat input
 # ----------------------------
@@ -85,13 +97,14 @@ if user_input:
             sources = get_sources(docs)
 
             # Call the LCEL chain (expects question, context, chat_history)
-            # For now we pass empty chat_history; you can inject memory later.
+            chat_history = build_chat_history()
+
             answer = rag_chain.invoke({
                 "question": user_input,
                 "context": context_str,
-                "chat_history": ""
+                "chat_history": chat_history
             })
-
+            
             # Compose full message with a Sources section beneath
             full_answer = answer
             if sources:

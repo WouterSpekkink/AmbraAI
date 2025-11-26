@@ -11,7 +11,7 @@ from rag_chain import rag_chain, build_context, get_sources  # from your rag_cha
 # ----------------------------
 # Streamlit page setup
 # ----------------------------
-st.set_page_config(page_title="Placeholder name", layout="wide")
+st.set_page_config(page_title="BernAId", layout="wide")
 st.title("Placeholder name")
 
 # ----------------------------
@@ -69,7 +69,7 @@ for msg in st.session_state.messages:
 # ----------------------------
 # Chat input
 # ----------------------------
-user_input = st.chat_input("Ask a question about your papers…")
+user_input = st.chat_input("Ask a question…")
 
 if user_input:
     # Show user message

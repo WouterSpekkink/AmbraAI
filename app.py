@@ -12,7 +12,7 @@ from rag_chain import rag_chain, build_context, get_sources  # from your rag_cha
 # Streamlit page setup
 # ----------------------------
 st.set_page_config(page_title="BernAId", layout="wide")
-st.title("Bernaid")
+st.title("BernAId")
 
 # ----------------------------
 # Session state

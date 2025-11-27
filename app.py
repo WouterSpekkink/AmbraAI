@@ -31,27 +31,7 @@ with st.sidebar:
     if st.button("Clear chat"):
         st.session_state.messages = []
         st.rerun()
-
-    # --- Quit app ---
-    st.markdown("---")
-    if "confirm_quit" not in st.session_state:
-        st.session_state.confirm_quit = False
-
-    if not st.session_state.confirm_quit:
-        if st.button("Quit app"):
-            st.session_state.confirm_quit = True
-            st.rerun()
-    else:
-        st.warning("Really quit the app for all users?")
-        col1, col2 = st.columns(2)
-        with col1:
-            if st.button("Yes, quit"):
-                os.kill(os.getpid(), signal.SIGTERM)  # clean terminate
-        with col2:
-            if st.button("Cancel"):
-                st.session_state.confirm_quit = False
-                st.rerun()
-
+        
 # ----------------------------
 # Render chat history
 # ----------------------------

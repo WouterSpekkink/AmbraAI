@@ -17,10 +17,7 @@ from langchain_core.prompts import (
 )
 from langchain_core.output_parsers import StrOutputParser
 
-# Dedupe/compress utilities
-from langchain_community.document_transformers import LongContextReorder, EmbeddingsRedundantFilter
-from langchain.retrievers.document_compressors import DocumentCompressorPipeline
-
+from langchain_community.document_transformers import LongContextReorder
 # ----------------------------
 # Config
 # ----------------------------
@@ -62,10 +59,8 @@ base_retriever = db.as_retriever(
 llm_util = ChatOpenAI(model=UTILITY_MODEL)
 llm_answer = ChatOpenAI(model=ANSWER_MODEL)
 
-# Light compression (after rerank) – you’re currently only using reorderer in retrieve_docs
-redundancy_filter = EmbeddingsRedundantFilter(embeddings=embeddings)
+# Long context reorder
 reorderer = LongContextReorder()
-compressor = DocumentCompressorPipeline(transformers=[redundancy_filter, reorderer])
 
 # ----------------------------
 # LLM re-ranking (compact numeric)
